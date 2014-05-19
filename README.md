@@ -1,12 +1,12 @@
 XAPIGame
 ========
 
-IFest XAPI integration demo game.
+# IFest XAPI integration demo game.
 
 This game allows for user editing of an enviornment with a simple drag and drop interface. Actions taken by the player and the
 author are recorded to an LRS using the XAPI. The game runs within the ADL Sandbox.
 
-Setup
+## Setup
 
 First, you must have a copy of the ADL Sandbox installed. 
 
@@ -21,7 +21,7 @@ The file called `state` is a copy of a Sandbox world. You'll need to import this
  2. Browse under `/{datadir}/States/{your UUID}/` and paste the `state` file.
  3. Load the world.
  
-Notes:
+## Notes:
  1. The behaviors of the entities are descripted in the `gamegui.js` file. They are standard VWF object definitions.
  2. In order to edit these, you may update the JSON directly. This can be very hard. You may also create one in the game
     and then edit the code with the Sandbox editor tools. You'll need to get the JSON representation of the modified object
