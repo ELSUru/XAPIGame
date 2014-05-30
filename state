@@ -1,1 +1,1067 @@
-[{"extends":"asset.vwf","properties":{"castShadows":true,"materialDef":{"alpha":1,"ambient":{"b":1,"g":1,"r":1},"color":{"b":1,"g":1,"r":1},"emit":{"b":0,"g":0,"r":0},"layers":[{"alpha":1,"blendMode":0,"mapInput":0,"mapTo":1,"offsetx":0,"offsety":0,"rot":0,"scalex":5.5,"scaley":5.6,"src":"/adl/sandbox/DnNE31e3uvYptRYw//vwfDataManager.svc/texture?UID=brick.jpg"}],"morphTargets":false,"reflect":0.1,"shininess":0.2,"side":0,"skinning":false,"specularColor":{"b":0.0666666666666667,"g":0.0666666666666667,"r":0.0666666666666667},"specularLevel":1,"type":"phong"},"owner":"Rob","receiveShadows":true,"transform":[1,0,0,0,0,1,0,0,0,0,1,0,0.48945099115371704,-1.1492148637771606,0.009999999776482582,1],"translation":[0.48945099115371704,-1.1492148637771606,0.009999999776482582]},"random":{"c":1,"s0":0.281323110219091,"s1":0.979119023773819,"s2":0.119790236931294},"sequence":0,"source":"./vwfdatamanager.svc/datafile/XAPIGame/gameboard.dae","type":"subDriver/threejs/asset/vnd.collada+xml","name":"./vwfdatamanager.svc/datafile/XAPIGame/gameboard.dae1"},{"children":{"371ce16d-b4aa-d944-6123-bfd76c8c2a89":{"extends":"rotator.vwf","properties":{"Active":true,"Amount":4,"DisplayName":"rotator1","Local":true,"owner":"Rob","type":"behavior"},"random":{"c":1,"s0":0.697554648621008,"s1":0.740025692153722,"s2":0.641901551513001},"sequence":0,"name":"371ce16d-b4aa-d944-6123-bfd76c8c2a89"}},"extends":"cone2.vwf","properties":{"DisplayName":"cone1","height":0.69,"hsegs":1,"materialDef":{"alpha":1,"ambient":{"b":0.0745098039215686,"g":0.0745098039215686,"r":0.968627450980392},"color":{"a":1,"b":0.0745098039215686,"g":0.0745098039215686,"r":0.968627450980392},"emit":{"b":0,"g":0,"r":0},"layers":[],"morphTargets":false,"reflect":0.8,"shadeless":false,"shadow":true,"shininess":15,"skinning":false,"specularColor":{"b":0.577350269189626,"g":0.577350269189626,"r":0.577350269189626},"specularLevel":1,"type":"phong"},"owner":"Rob","quaternion":[0.9608603715896606,-0.021627813577651978,-0.0012508485233411193,0.2761848568916321],"radius":0.33,"rsegs":3,"size":[0.5,1,0.5],"tempid":"","testprop":"value","texture":"checker.jpg","transform":[0.9990760087966919,-0.04213576391339302,0.010050029493868351,0,-0.04105205461382866,-0.8464931845664978,0.5307808518409729,0,-0.013836323283612728,-0.5307076573371887,-0.8474375009536743,0,-4.399999618530273,-0.9682438969612122,1.3683621883392334,1],"translation":[-4.399999618530273,-0.9682438969612122,1.3683621883392334],"type":"Primitive"},"random":{"c":1,"s0":0.709777161711827,"s1":0.231308539630845,"s2":0.789308838779107},"sequence":0,"source":"vwf/model/threejs/cone.js","type":"subDriver/threejs","name":"3b2df2e9-b9c8-2082-930f-eabf145f5273"},{"extends":"http://vwf.example.com/behavior.vwf","methods":{"initialize":{"body":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n","parameters":[]},"postDeath":{"body":"\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': this.playerName\n          },\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/verbs/killed_by\",\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/\" + _DataManager.getCurrentSession() + trapName);\n          statement.context = {};\n          statement.context.registration = this.registration;\n          statement.context.extensions = {\n              \"ext://vwf.adlnet.gov/IFestGame/Obstacle\": trapName,\n              \"ext://vwf.adlnet.gov/IFestGame/Time\": this.Scene.children_by_name.Player.timer\n          };\n          statement.verb.display['en-US'] = 'was killed by ' + trapName;\n          this.xAPI.sendStatement(null, statement);\n","parameters":["trapName"]},"postQuit":{"body":"\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': this.playerName\n          },\n              ADL.verbs.terminated,\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/\" + _DataManager.getCurrentSession());\n          statement.generateId();\n          statement.context = {};\n          statement.context.registration = this.registration;\n          console.log(statement);\n          this.xAPI.sendStatement(null, statement);\n","parameters":[]},"postSpawn":{"body":"\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': this.playerName\n          },\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/verbs/spawned_in\",\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/\" + _DataManager.getCurrentSession());\n          statement.generateId();\n          statement.context = {};\n          statement.context.registration = this.registration;\n          console.log(statement);\n          this.xAPI.sendStatement(null, statement);\n","parameters":["player"]},"postStart":{"body":"\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': player\n          },\n              ADL.verbs.attempted,\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/\" + _DataManager.getCurrentSession());\n          statement.generateId();\n          statement.context = {};\n          statement.context.registration = this.registration;\n          console.log(statement);\n          this.xAPI.sendStatement(null, statement);\n","parameters":["player"]},"postSuccess":{"body":"\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': this.playerName\n          },\n              ADL.verbs.completed,\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/\" + _DataManager.getCurrentSession());\n          statement.context = {};\n          statement.context.registration = this.registration;\n          this.xAPI.sendStatement(null, statement);\n","parameters":[]},"postWaypoint":{"body":"\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': this.playerName\n          },\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/verbs/reached\",\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014\" + _DataManager.getCurrentSession() + '/' + waypointName);\n          statement.context = {};\n          statement.context.extensions = {\n              \"ext://vwf.adlnet.gov/IFestGame/Waypoint\": waypointName,\n              \"ext://vwf.adlnet.gov/IFestGame/Time\": this.Scene.children_by_name.Player.time\n          };\n          statement.context.registration = this.registration;\n          this.xAPI.sendStatement(null, statement);\n","parameters":["waypointName"]},"ready":{"body":"\n\n\n      this.xAPI.configure(\n               {\n              endpoint: 'https://lrs.adlnet.gov/xapi/',\n              user: 'IFestGame',\n              password: 'UQw9Sw*FcZlM'\n          });\n          this.xAPI.testConfig();\n          var id = this.id;\n          var self2 = this;\n          this.registration = GUID();\n          _dView.setCamera('SandboxCamera-vwf-58faf29-3658-392-e779-44d7f701f192');\n\n          this.Scene.bind('avatarCreated', function(cid, name)\n          {\n              window.setTimeout(function()\n              {\n                  _dView.setCamera('SandboxCamera-vwf-58faf29-3658-392-e779-44d7f701f192');\n              }, 300);\n          });\n\n          this.Scene.bind('clientConnected', function(cid, name)\n          {\n              _dView.setCamera('SandboxCamera-vwf-58faf29-3658-392-e779-44d7f701f192');\n              self2.playerName = name;\n\n              if (self2.playerName == 'anonymous')\n              {\n                  alertify.prompt(\"Please tell me your name.\", function(ok, val)\n                  {\n                      vwf_view.kernel.setProperty(self2.id, 'playerName', val);\n                      self2.postStart(val);\n\n                  });\n              }\n              else\n              {\n                  this.postStart(self2.playerName);\n              }\n          });\n\n          var settings = _DataManager.getInstanceData();\n          if (!settings.publishSettings)\n          {\n              $(document.head).append('<script type=\"text/javascript\" src=\"./vwfdatamanager.svc/datafile/XAPIGame/gamegui.js\" ></script>')\n          }\n","parameters":[]},"reset":{"body":"\n\n\n      var myself = this;\n\n          function walk(node)\n          {\n              if (!node || node == myself || node == myself.Scene.children_by_name.Player) return;\n\n              if (node.reset)\n                  node.reset();\n              var children = node.children;\n              for (var i = 0; i < children.length; i++)\n              {\n                  if (children[i])\n                      walk(children[i]);\n              }\n          }\n          var children = this.parent.children;\n          for (var i = 0; i < children.length; i++)\n          {\n              walk(children[i]);\n          }\n          this.postSpawn();\n","parameters":[]}},"properties":{"DisplayName":"GameCode","NotProto":"","owner":"Rob","paused":false,"playerName":"Rob","registration":"932392f6-123c-b5b6-590b-fcd5f8882a06","type":"behavior"},"random":{"c":1,"s0":0.61410125461407,"s1":0.146318237995729,"s2":0.355505408486351},"sequence":0,"name":"528b1838-cc3c-d7c-b8ee-17f0d5806c2c"},{"children":{"fd05649d-f109-ef76-b8ea-396e783d8a20":{"extends":"hoverlabel.vwf","properties":{"DisplayName":"hoverlabel1","color":[1,0.9019607843137255,0],"offset3D":[0,0,0.9],"owner":"Rob","text":"Start!","textsize":47,"type":"behavior"},"random":{"c":1,"s0":0.0182904226239771,"s1":0.415411794790998,"s2":0.657714408589527},"sequence":0,"name":"fd05649d-f109-ef76-b8ea-396e783d8a20"}},"extends":"cylinder2.vwf","properties":{"DisplayName":"cylinder1","height":0.26,"materialDef":{"alpha":1,"ambient":{"b":0.0745098039215686,"g":0.0745098039215686,"r":0.968627450980392},"color":{"a":1,"b":0.0745098039215686,"g":0.0745098039215686,"r":0.968627450980392},"emit":{"b":0,"g":0,"r":0},"layers":[],"morphTargets":false,"reflect":0.8,"shadeless":false,"shadow":true,"shininess":15,"skinning":false,"specularColor":{"b":0.577350269189626,"g":0.577350269189626,"r":0.577350269189626},"specularLevel":1,"type":"phong"},"owner":"Rob","quaternion":[0,0,0,1],"radius":0.59,"rsegs":8,"size":[1,0.5,0.5],"tempid":"","texture":"checker.jpg","transform":[1,0,0,0,0,1,0,0,0,0,1,0,-4.399999618530273,-1.2000004053115845,0.0010000000474974513,1],"translation":[-4.399999618530273,-1.2000004053115845,0.0010000000474974513],"type":"Primitive"},"random":{"c":1,"s0":0.307763082440943,"s1":0.157772459322587,"s2":0.224498455645517},"sequence":0,"source":"vwf/model/threejs/cylinder.js","type":"subDriver/threejs","name":"57a66669-539-e627-73b-5a87c02bd688"},{"extends":"SandboxCamera.vwf","properties":{"DisplayName":"GameCama","fov":45,"materialDef":{"alpha":1,"ambient":{"b":1,"g":1,"r":1},"color":{"b":1,"g":1,"r":1},"emit":{"b":0,"g":0,"r":0},"layers":[{"alpha":1,"blendMode":0,"mapInput":0,"mapTo":1,"offsetx":0,"offsety":0,"rot":0,"scalex":5.3,"scaley":6.1,"src":"/adl/sandbox/DnNE31e3uvYptRYw//vwfDataManager.svc/texture?UID=brick.jpg"}],"morphTargets":false,"reflect":0.1,"shininess":0.2,"side":0,"skinning":false,"specularColor":{"b":0.0666666666666667,"g":0.0666666666666667,"r":0.0666666666666667},"specularLevel":1,"type":"phong"},"owner":"Rob","quaternion":[-0.7071068286895752,0,0,0.7071067094802856],"transform":[1,0,0,0,0,-1.3078633287477714e-7,-0.9999998807907104,0,0,0.9999998807907104,-1.3078633287477714e-7,0,0.011422243900597095,-1.155956506729126,11.91999340057373,1],"translation":[0.011422243900597095,-1.155956506729126,11.91999340057373]},"random":{"c":1,"s0":0.293749240227044,"s1":0.289425936760381,"s2":0.0649766458664089},"sequence":0,"source":"vwf/model/threejs/camera.js","type":"subDriver/threejs","name":"58faf29-3658-392-e779-44d7f701f192"},{"children":{"1e8f40f1-7ad6-f731-62d0-65bccbc91286":{"extends":"SandboxCamera.vwf","properties":{"DisplayName":"Camera1","owner":"Rob","transform":[1,0,0,0,0,0.8660255670547485,-0.5000000596046448,0,0,0.5000000596046448,0.8660255670547485,0,-0.1387643814086914,-1.1550631523132324,1.225171446800232,1],"translation":[-0.1387643814086914,-1.1550631523132324,1.225171446800232]},"random":{"c":1,"s0":0.66005057701841,"s1":0.261992189334705,"s2":0.890604599611834},"sequence":0,"source":"vwf/model/threejs/camera.js","type":"subDriver/threejs","name":"1e8f40f1-7ad6-f731-62d0-65bccbc91286"},"6b6e6aa3-bab7-9e12-16e1-3e54f035c875":{"extends":"SandboxParticleSystem.vwf","methods":{"hide":{"body":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                this.visible = false;\n","parameters":[]}},"properties":{"DisplayName":"ParticleSystem1","additive":true,"damping":0.71,"depthTest":false,"endColor":[0,0,0,0.19],"endSize":0.37,"gravity":0.01,"image":"/adl/sandbox/p7jjNfdWCRtxqLAE//vwfDataManager.svc/texture?UID=fire.jpg","mamSpin":3.3,"maxAcceleration":[0,0,0],"maxLifeTime":33,"maxOrientation":15.7,"maxRate":10000000.001,"maxVelocity":[-1,-1,-0.0056999999999981735],"minAcceleration":[0,0,0],"minLifeTime":33,"minOrientation":-22.5,"minSpin":-9.3,"minVelocity":[1,1,0.1],"owner":"Rob","solver":"Analytic","startSize":0.86,"transform":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],"translation":[0,0,0],"type":"ParticleSystem","velocityMode":"spherical","visible":false},"random":{"c":1,"s0":0.750982497818768,"s1":0.964711369713768,"s2":0.593375997850671},"sequence":0,"name":"6b6e6aa3-bab7-9e12-16e1-3e54f035c875"}},"extends":"sphere2.vwf","methods":{"Die":{"body":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                                                                    this.audioAPI.playSound(\"./vwfdatamanager.svc/datafile/XAPIGame/explode.mp3\", false, 100);\n\n                                                                                                                                                                                                                                                                                                                                                        this.Scene.children_by_name.GameCode.paused = true;\n                                                                                                                                                                                                                                                                                                                                                        this.children_by_name.ParticleSystem1.visible = true;\n                                                                                                                                                                                                                                                                                                                                                        this.children_by_name.ParticleSystem1.future(.5).hide();\n                                                                                                                                                                                                                                                                                                                                                        this.children_by_name.ParticleSystem1.maxVelocity[2] += .0001;\n                                                                                                                                                                                                                                                                                                                                                        this.visible = false;\n                                                                                                                                                                                                                                                                                                                                                        this.future(2).reset();\n                                                                                                                                                                                                                                                                                                                                                        alertify.error('You died!', function() {\n\n                                                                                                                                                                                                                                                                                                                                                        }.bind(this));\n","parameters":[]},"ready":{"body":"\n\n\n\n\n\n\n\n\n\n\n\n                        this.Scene.unbind('keyDown', this.keydownfunc);\n                            this.Scene.unbind('keyUp', this.keyupfunc);\n\n                            var self = this;\n                            this.keydownfunc = function(keyData)\n                            {\n                                console.log(keyData);\n                                self.lastKeyDown = keyData.key.char;\n                                if (keyData.key.char == 'W')\n                                    self.movement = [0, .2, 0];\n                                if (keyData.key.char == 'S')\n                                    self.movement = [0, -.2, 0];\n                                if (keyData.key.char == 'A')\n                                    self.movement = [-.2, 0, 0];\n                                if (keyData.key.char == 'D')\n                                    self.movement = [.2, 0, 0];\n                            };\n\n                            this.keyupfunc = function(keyData)\n                            {\n                                if (keyData.key && keyData.key.char == self.lastKeyDown)\n                                    self.movement = [0, 0, 0];\n                            };\n\n                            this.Scene.bind('keyDown', this.keydownfunc);\n                            this.Scene.bind('keyUp', this.keyupfunc);\n\n                            //This function was created for you by the system. \n                            //The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n","parameters":[]},"reset":{"body":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                                            this.Scene.children_by_name.GameCode.paused = false;\n                                                                                                                                                                                                                                                                                                                                var origin = this.Scene.placemarks.startpoint.internal_val;\n                                                                                                                                                                                                                                                                                                                                this.transformAPI.setPosition(origin[0], origin[1], origin[2] + .5);\n                                                                                                                                                                                                                                                                                                                                this.children_by_name.ParticleSystem1.visible = false;\n                                                                                                                                                                                                                                                                                                                                this.visible = true;\n                                                                                                                                                                                                                                                                                                                                this.timer = 0;\n                                                                                                                                                                                                                                                                                                                                this.Scene.children_by_name.GameCode.postStart(_UserManager.GetCurrentUserName());\n                                                                                                                                                                                                                                                                                                                                this.Scene.children_by_name.GameCode.reset();\n","parameters":[]},"tick":{"body":"\n\n\n\n\n\n\n              if (this.Scene.children_by_name.GameCode.paused === true) return;\n                  //This function was created for you by the system. \n                  //The tick function is called 20 times every second. \n                  // Write code here to animate over time\n                  var hits = this.tryMove(this.movement);\n\n                  if (!hits)\n                      this.transformAPI.move(this.movement[0], this.movement[1], this.movement[2]);\n                  else\n                  {   \n                      /*\n                      var trans = this.transformAPI.getPosition();\n                      var left = 0,\n                          right = 0,\n                          up = 0,\n                          down = 0;\n                      for (var i = 0; i < hits.length; i++)\n                      {\n                          if (hits[i].point[0] > trans[0]) left--;\n                          if (hits[i].point[0] < trans[0]) right++;\n                          if (hits[i].point[1] > trans[1]) up--;\n                          if (hits[i].point[1] < trans[1]) down++;\n                      }\n\n                      left = left / hits.length;\n                      right = right / hits.length;\n                      up = up / hits.length;\n                      down = down / hits.length;\n\n                      this.transformAPI.move((left + right) / 55 * (this.movement[0] == 0 ? 1 : 0), (up + down) / 55 * (this.movement[1] == 0 ? 1 : 0), 0);\n                      console.log(left, right, up, down); */\n                  }\n                  this.timer += 1.0 / 30.0;\n","parameters":[]},"tryMove":{"body":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                        if (Vec3.magnitude(dir) == 0) return false;\n\n                                                                                            var transform = this.translation.internal_val;\n                                                                                            var newpos = Vec3.add(transform, dir.internal_val, []);\n                                                                                            var hits = _SceneManager.SphereCast(newpos, .25,\n                                                                                            {\n                                                                                                OneHitPerMesh: false,\n                                                                                                ignore: [_dSky, _Editor.findviewnode(this.id)]\n                                                                                            });\n\n                                                                                            if (hits && hits.length)\n                                                                                            {\n\n                                                                                                return hits;\n                                                                                            }\n                                                                                            return false;\n","parameters":["dir"]}},"properties":{"DisplayName":"Player","materialDef":{"alpha":1,"ambient":{"b":1,"g":0,"r":0.0823529411764706},"color":{"a":1,"b":1,"g":0,"r":0.0823529411764706},"emit":{"b":0,"g":0,"r":0},"layers":[],"morphTargets":false,"reflect":0.8,"shadeless":false,"shadow":true,"shininess":15,"skinning":false,"specularColor":{"b":0.577350269189626,"g":0.577350269189626,"r":0.577350269189626},"specularLevel":1,"type":"phong"},"movement":[0,0,0],"owner":"Rob","quaternion":[0,0,0,1],"radius":0.4,"size":[0.5,1,1],"tempid":"","texture":"checker.jpg","time":0,"timer":18.1000000000001,"transform":[1,0,0,0,0,1,0,0,0,0,1,0,-4.453024864196777,-1.2624917030334473,0.6100000143051147,1],"translation":[-4.453024864196777,-1.2624917030334473,0.6100000143051147],"type":"Primitive","visible":true},"random":{"c":1,"s0":0.489484123885632,"s1":0.787186275236309,"s2":0.766554398229346},"sequence":0,"source":"vwf/model/threejs/sphere.js","type":"subDriver/threejs","name":"d7ab6422-9b04-f46f-9247-620e3217770e"},{"children":{"6d482e8-f3cf-eeee-ce28-77c685817e46":{"children":{"d7355484-de05-9a75-373c-bccd741374d7":{"extends":"rotator.vwf","properties":{"Active":true,"DisplayName":"rotator1","Local":true,"owner":"Rob","type":"behavior"},"random":{"c":1,"s0":0.374866498634219,"s1":0.831964534241706,"s2":0.533414667937905},"sequence":0,"name":"d7355484-de05-9a75-373c-bccd741374d7"}},"extends":"cone2.vwf","properties":{"DisplayName":"cone1","height":0.69,"materialDef":{"shininess":15,"alpha":1,"ambient":{"r":0,"g":0.6705882352941176,"b":0.09019607843137255},"color":{"r":0,"g":0.6705882352941176,"b":0.09019607843137255,"a":1},"emit":{"r":0,"g":0,"b":0},"reflect":0.8,"shadeless":false,"shadow":true,"specularColor":{"r":0.5773502691896258,"g":0.5773502691896258,"b":0.5773502691896258},"specularLevel":1,"layers":[],"morphTargets":false,"skinning":false,"type":"phong"},"owner":"Rob","radius":0.33,"rsegs":3,"size":[0.5,1,0.5],"tempid":"","texture":"checker.jpg","transform":[-0.6844872236251831,-0.6128361821174622,0.3948557674884796,0,-0.7289171814918518,0.5854766368865967,-0.35485678911209106,0,-0.01371348462998867,-0.5307013988494873,-0.8474491238594055,0,-2.9802322831784522e-9,0.0317564494907856,1.367362141609192,1],"translation":[-2.9802322831784522e-9,0.0317564494907856,1.367362141609192],"type":"Primitive"},"random":{"c":1,"s0":0.673546148231253,"s1":0.329978154040873,"s2":0.257451710291207},"sequence":0,"source":"vwf/model/threejs/cone.js","type":"subDriver/threejs","name":"6d482e8-f3cf-eeee-ce28-77c685817e46"},"f280a341-263e-dd03-9dcc-9beb6d0a4243":{"extends":"hoverlabel.vwf","properties":{"DisplayName":"hoverlabel1","color":[1,0.9019607843137255,0],"offset3D":[0,0,0.9],"owner":"Rob","text":"Goal!","textsize":47,"type":"behavior"},"random":{"c":1,"s0":0.235764436423779,"s1":0.838487991364673,"s2":0.67600059369579},"sequence":0,"name":"f280a341-263e-dd03-9dcc-9beb6d0a4243"}},"extends":"cylinder2.vwf","methods":{"playWinSound":{"body":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                      this.audioAPI.stopSound(\"./vwfdatamanager.svc/datafile/XAPIGame/win.mp3\");\n                                                                                                                                                                                                                                                                                                          this.audioAPI.playSound(\"./vwfdatamanager.svc/datafile/XAPIGame/win.mp3\", false, 100);\n","parameters":[]},"tick":{"body":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                        if (Vec3.distance(this.transformAPI.getPosition(), this.Scene.children_by_name.Player.transformAPI.getPosition()) < .8)\n                                                                                                                                                                                                                                                                                                            {\n                                                                                                                                                                                                                                                                                                                alertify.alert(\"You Win!\");\n                                                                                                                                                                                                                                                                                                                this.Scene.children_by_name.GameCode.postSuccess();\n                                                                                                                                                                                                                                                                                                                this.Scene.children_by_name.Player.reset();\n                                                                                                                                                                                                                                                                                                                \n                                                                                                                                                                                                                                                                                                            }\n","parameters":[]}},"properties":{"DisplayName":"cylinder1","height":0.26,"materialDef":{"alpha":1,"ambient":{"b":0.0901960784313725,"g":0.670588235294118,"r":0},"color":{"a":1,"b":0.0901960784313725,"g":0.670588235294118,"r":0},"emit":{"b":0,"g":0,"r":0},"layers":[],"morphTargets":false,"reflect":0.8,"shadeless":false,"shadow":true,"shininess":15,"skinning":false,"specularColor":{"b":0.577350269189626,"g":0.577350269189626,"r":0.577350269189626},"specularLevel":1,"type":"phong"},"owner":"Rob","quaternion":[0,0,0,1],"radius":0.46,"rsegs":8,"size":[1,0.5,0.5],"tempid":"","texture":"checker.jpg","transform":[1,0,0,0,0,1,0,0,0,0,1,0,0.5999990701675415,2.999999761581421,0.0010000000474974513,1],"translation":[0.5999990701675415,2.999999761581421,0.0010000000474974513],"type":"Primitive"},"random":{"c":1,"s0":0.723132537910715,"s1":0.637780156685039,"s2":0.0355265494436026},"sequence":0,"source":"vwf/model/threejs/cylinder.js","type":"subDriver/threejs","name":"df9935e2-56fa-59c0-5a00-3306185e5bd8"},{"clients":{"Llljl110sPN6iRCcNaBb":{"cid":"Llljl110sPN6iRCcNaBb","name":"Rob"}},"DisplayName":null,"placemarks":{"Origin":{"0":-6.934999942779541,"1":-367,"2":0},"startpoint":{"0":-4.453024864196777,"1":-1.2624917030334473,"2":0.10999999940395355}},"navmode":"none","sunColor":[1,1,1],"sunDirection":[0.75,0.55,1],"sunIntensity":0.8,"ambientColor":[0.35,0.35,0.35],"fogColor":[1,1,1],"fogNear":100,"fogFar":1000,"fogType":0,"fogDensity":0.005,"fogVFalloff":1.3,"fogVFalloffStart":0,"skyColorBlend":1,"skyFogBlend":0,"skyApexColor":[0.4588235294117647,0.4588235294117647,0.4588235294117647],"skyHorizonColor":[0.3411764705882353,0.3333333333333333,0.3333333333333333],"vAtmosphereDensity":0.0005,"playMode":"stop","materialDef":{"shininess":0,"alpha":0.98,"ambient":{"r":0.23921568627450981,"g":0.23921568627450981,"b":0.23921568627450981},"color":{"r":0.23921568627450981,"g":0.23921568627450981,"b":0.23921568627450981,"a":1},"emit":{"r":0,"g":0,"b":0},"reflect":0,"shadeless":false,"shadow":true,"specularColor":{"r":0.5773502691896258,"g":0.5773502691896258,"b":0.5773502691896258},"specularLevel":1,"layers":{"length":0},"type":"phong"},"owner":"Rob","type":"scene","playBackup":null,"publishSettings":{"SinglePlayer":true,"camera":"SandboxCamera-vwf-58faf29-3658-392-e779-44d7f701f192","allowAnonymous":true,"createAvatar":false,"allowTools":false}}]
+[
+  {
+    "extends": "asset.vwf",
+    "properties": {
+      "castShadows": true,
+      "materialDef": {
+        "alpha": 1,
+        "ambient": {
+          "b": 1,
+          "g": 1,
+          "r": 1
+        },
+        "color": {
+          "b": 1,
+          "g": 1,
+          "r": 1
+        },
+        "emit": {
+          "b": 0,
+          "g": 0,
+          "r": 0
+        },
+        "layers": [
+          {
+            "alpha": 1,
+            "blendMode": 0,
+            "mapInput": 0,
+            "mapTo": 1,
+            "offsetx": 0,
+            "offsety": 0,
+            "rot": 0,
+            "scalex": 5.5,
+            "scaley": 5.6,
+            "src": "/adl/sandbox/DnNE31e3uvYptRYw//vwfDataManager.svc/texture?UID=brick.jpg"
+          }
+        ],
+        "morphTargets": false,
+        "reflect": 0.1,
+        "shininess": 0.2,
+        "side": 0,
+        "skinning": false,
+        "specularColor": {
+          "b": 0.0666666666666667,
+          "g": 0.0666666666666667,
+          "r": 0.0666666666666667
+        },
+        "specularLevel": 1,
+        "type": "phong"
+      },
+      "owner": "Rob",
+      "receiveShadows": true,
+      "transform": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0.48945099115371704,
+        -1.1492148637771606,
+        0.009999999776482582,
+        1
+      ],
+      "translation": [
+        0.48945099115371704,
+        -1.1492148637771606,
+        0.009999999776482582
+      ]
+    },
+    "random": {
+      "c": 1,
+      "s0": 0.281323110219091,
+      "s1": 0.979119023773819,
+      "s2": 0.119790236931294
+    },
+    "sequence": 0,
+    "source": "./vwfdatamanager.svc/datafile/XAPIGame/gameboard.dae",
+    "type": "subDriver/threejs/asset/vnd.collada+xml",
+    "name": "./vwfdatamanager.svc/datafile/XAPIGame/gameboard.dae1"
+  },
+  {
+    "children": {
+      "371ce16d-b4aa-d944-6123-bfd76c8c2a89": {
+        "extends": "rotator.vwf",
+        "properties": {
+          "Active": true,
+          "Amount": 4,
+          "DisplayName": "rotator1",
+          "Local": true,
+          "owner": "Rob",
+          "type": "behavior"
+        },
+        "random": {
+          "c": 1,
+          "s0": 0.697554648621008,
+          "s1": 0.740025692153722,
+          "s2": 0.641901551513001
+        },
+        "sequence": 0,
+        "name": "371ce16d-b4aa-d944-6123-bfd76c8c2a89"
+      }
+    },
+    "extends": "cone2.vwf",
+    "properties": {
+      "DisplayName": "cone1",
+      "height": 0.69,
+      "hsegs": 1,
+      "materialDef": {
+        "alpha": 1,
+        "ambient": {
+          "b": 0.0745098039215686,
+          "g": 0.0745098039215686,
+          "r": 0.968627450980392
+        },
+        "color": {
+          "a": 1,
+          "b": 0.0745098039215686,
+          "g": 0.0745098039215686,
+          "r": 0.968627450980392
+        },
+        "emit": {
+          "b": 0,
+          "g": 0,
+          "r": 0
+        },
+        "layers": [],
+        "morphTargets": false,
+        "reflect": 0.8,
+        "shadeless": false,
+        "shadow": true,
+        "shininess": 15,
+        "skinning": false,
+        "specularColor": {
+          "b": 0.577350269189626,
+          "g": 0.577350269189626,
+          "r": 0.577350269189626
+        },
+        "specularLevel": 1,
+        "type": "phong"
+      },
+      "owner": "Rob",
+      "quaternion": [
+        0.9608603715896606,
+        -0.021627813577651978,
+        -0.0012508485233411193,
+        0.2761848568916321
+      ],
+      "radius": 0.33,
+      "rsegs": 3,
+      "size": [
+        0.5,
+        1,
+        0.5
+      ],
+      "tempid": "",
+      "testprop": "value",
+      "texture": "checker.jpg",
+      "transform": [
+        0.9990760087966919,
+        -0.04213576391339302,
+        0.010050029493868351,
+        0,
+        -0.04105205461382866,
+        -0.8464931845664978,
+        0.5307808518409729,
+        0,
+        -0.013836323283612728,
+        -0.5307076573371887,
+        -0.8474375009536743,
+        0,
+        -4.399999618530273,
+        -0.9682438969612122,
+        1.3683621883392334,
+        1
+      ],
+      "translation": [
+        -4.399999618530273,
+        -0.9682438969612122,
+        1.3683621883392334
+      ],
+      "type": "Primitive"
+    },
+    "random": {
+      "c": 1,
+      "s0": 0.709777161711827,
+      "s1": 0.231308539630845,
+      "s2": 0.789308838779107
+    },
+    "sequence": 0,
+    "source": "vwf/model/threejs/cone.js",
+    "type": "subDriver/threejs",
+    "name": "3b2df2e9-b9c8-2082-930f-eabf145f5273"
+  },
+  {
+    "extends": "http://vwf.example.com/behavior.vwf",
+    "methods": {
+      "initialize": {
+        "body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+        "parameters": []
+      },
+      "postDeath": {
+        "body": "\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': this.playerName\n          },\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/verbs/killed_by\",\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/\" + _DataManager.getCurrentSession() + trapName);\n          statement.context = {};\n          statement.context.registration = this.registration;\n          statement.context.extensions = {\n              \"ext://vwf.adlnet.gov/IFestGame/Obstacle\": trapName,\n              \"ext://vwf.adlnet.gov/IFestGame/Time\": this.Scene.children_by_name.Player.timer\n          };\n          statement.verb.display['en-US'] = 'was killed by ' + trapName;\n          this.xAPI.sendStatement(null, statement);\n",
+        "parameters": [
+          "trapName"
+        ]
+      },
+      "postQuit": {
+        "body": "\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': this.playerName\n          },\n              ADL.verbs.terminated,\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/\" + _DataManager.getCurrentSession());\n          statement.generateId();\n          statement.context = {};\n          statement.context.registration = this.registration;\n          console.log(statement);\n          this.xAPI.sendStatement(null, statement);\n",
+        "parameters": []
+      },
+      "postSpawn": {
+        "body": "\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': this.playerName\n          },\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/verbs/spawned_in\",\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/\" + _DataManager.getCurrentSession());\n          statement.generateId();\n          statement.context = {};\n          statement.context.registration = this.registration;\n          console.log(statement);\n          this.xAPI.sendStatement(null, statement);\n",
+        "parameters": [
+          "player"
+        ]
+      },
+      "postStart": {
+        "body": "\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': player\n          },\n              ADL.verbs.attempted,\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/\" + _DataManager.getCurrentSession());\n          statement.generateId();\n          statement.context = {};\n          statement.context.registration = this.registration;\n          console.log(statement);\n          this.xAPI.sendStatement(null, statement);\n",
+        "parameters": [
+          "player"
+        ]
+      },
+      "postSuccess": {
+        "body": "\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': this.playerName\n          },\n              ADL.verbs.completed,\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/\" + _DataManager.getCurrentSession());\n          statement.context = {};\n          statement.context.registration = this.registration;\n          this.xAPI.sendStatement(null, statement);\n",
+        "parameters": []
+      },
+      "postWaypoint": {
+        "body": "\n\n\n      if (!_DataManager.getInstanceData().publishSettings) return;\n          var statement = new ADL.XAPIStatement(\n          {\n              'homePage': 'http://vwf.adlnet.gov',\n              'name': this.playerName\n          },\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014/verbs/reached\",\n              \"http://vwf.adlnet.gov/xapi/IFestGame2014\" + _DataManager.getCurrentSession() + '/' + waypointName);\n          statement.context = {};\n          statement.context.extensions = {\n              \"ext://vwf.adlnet.gov/IFestGame/Waypoint\": waypointName,\n              \"ext://vwf.adlnet.gov/IFestGame/Time\": this.Scene.children_by_name.Player.time\n          };\n          statement.context.registration = this.registration;\n          this.xAPI.sendStatement(null, statement);\n",
+        "parameters": [
+          "waypointName"
+        ]
+      },
+      "ready": {
+        "body": "\n\n\n      this.xAPI.configure(\n               {\n              endpoint: 'https://lrs.adlnet.gov/xapi/',\n              user: 'IFestGame',\n              password: 'UQw9Sw*FcZlM'\n          });\n          this.xAPI.testConfig();\n          var id = this.id;\n          var self2 = this;\n          this.registration = GUID();\n          _dView.setCamera('SandboxCamera-vwf-58faf29-3658-392-e779-44d7f701f192');\n\n          this.Scene.bind('avatarCreated', function(cid, name)\n          {\n              window.setTimeout(function()\n              {\n                  _dView.setCamera('SandboxCamera-vwf-58faf29-3658-392-e779-44d7f701f192');\n              }, 300);\n          });\n\n          this.Scene.bind('clientConnected', function(cid, name)\n          {\n              _dView.setCamera('SandboxCamera-vwf-58faf29-3658-392-e779-44d7f701f192');\n              self2.playerName = name;\n\n              if (self2.playerName == 'anonymous')\n              {\n                  alertify.prompt(\"Please tell me your name.\", function(ok, val)\n                  {\n                      vwf_view.kernel.setProperty(self2.id, 'playerName', val);\n                      self2.postStart(val);\n\n                  });\n              }\n              else\n              {\n                  this.postStart(self2.playerName);\n              }\n          });\n\n          var settings = _DataManager.getInstanceData();\n          if (!settings.publishSettings)\n          {\n              $(document.head).append('<script type=\"text/javascript\" src=\"./vwfdatamanager.svc/datafile/XAPIGame/gamegui.js\" ></script>')\n          }\n",
+        "parameters": []
+      },
+      "reset": {
+        "body": "\n\n\n      var myself = this;\n\n          function walk(node)\n          {\n              if (!node || node == myself || node == myself.Scene.children_by_name.Player) return;\n\n              if (node.reset)\n                  node.reset();\n              var children = node.children;\n              for (var i = 0; i < children.length; i++)\n              {\n                  if (children[i])\n                      walk(children[i]);\n              }\n          }\n          var children = this.parent.children;\n          for (var i = 0; i < children.length; i++)\n          {\n              walk(children[i]);\n          }\n          this.postSpawn();\n",
+        "parameters": []
+      }
+    },
+    "properties": {
+      "DisplayName": "GameCode",
+      "NotProto": "",
+      "owner": "Rob",
+      "paused": false,
+      "playerName": "Rob",
+      "registration": "932392f6-123c-b5b6-590b-fcd5f8882a06",
+      "type": "behavior"
+    },
+    "random": {
+      "c": 1,
+      "s0": 0.61410125461407,
+      "s1": 0.146318237995729,
+      "s2": 0.355505408486351
+    },
+    "sequence": 0,
+    "name": "528b1838-cc3c-d7c-b8ee-17f0d5806c2c"
+  },
+  {
+    "children": {
+      "fd05649d-f109-ef76-b8ea-396e783d8a20": {
+        "extends": "hoverlabel.vwf",
+        "properties": {
+          "DisplayName": "hoverlabel1",
+          "color": [
+            1,
+            0.9019607843137255,
+            0
+          ],
+          "offset3D": [
+            0,
+            0,
+            0.9
+          ],
+          "owner": "Rob",
+          "text": "Start!",
+          "textsize": 47,
+          "type": "behavior"
+        },
+        "random": {
+          "c": 1,
+          "s0": 0.0182904226239771,
+          "s1": 0.415411794790998,
+          "s2": 0.657714408589527
+        },
+        "sequence": 0,
+        "name": "fd05649d-f109-ef76-b8ea-396e783d8a20"
+      }
+    },
+    "extends": "cylinder2.vwf",
+    "properties": {
+      "DisplayName": "cylinder1",
+      "height": 0.26,
+      "materialDef": {
+        "alpha": 1,
+        "ambient": {
+          "b": 0.0745098039215686,
+          "g": 0.0745098039215686,
+          "r": 0.968627450980392
+        },
+        "color": {
+          "a": 1,
+          "b": 0.0745098039215686,
+          "g": 0.0745098039215686,
+          "r": 0.968627450980392
+        },
+        "emit": {
+          "b": 0,
+          "g": 0,
+          "r": 0
+        },
+        "layers": [],
+        "morphTargets": false,
+        "reflect": 0.8,
+        "shadeless": false,
+        "shadow": true,
+        "shininess": 15,
+        "skinning": false,
+        "specularColor": {
+          "b": 0.577350269189626,
+          "g": 0.577350269189626,
+          "r": 0.577350269189626
+        },
+        "specularLevel": 1,
+        "type": "phong"
+      },
+      "owner": "Rob",
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "radius": 0.59,
+      "rsegs": 8,
+      "size": [
+        1,
+        0.5,
+        0.5
+      ],
+      "tempid": "",
+      "texture": "checker.jpg",
+      "transform": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -4.399999618530273,
+        -1.2000004053115845,
+        0.0010000000474974513,
+        1
+      ],
+      "translation": [
+        -4.399999618530273,
+        -1.2000004053115845,
+        0.0010000000474974513
+      ],
+      "type": "Primitive"
+    },
+    "random": {
+      "c": 1,
+      "s0": 0.307763082440943,
+      "s1": 0.157772459322587,
+      "s2": 0.224498455645517
+    },
+    "sequence": 0,
+    "source": "vwf/model/threejs/cylinder.js",
+    "type": "subDriver/threejs",
+    "name": "57a66669-539-e627-73b-5a87c02bd688"
+  },
+  {
+    "extends": "SandboxCamera.vwf",
+    "properties": {
+      "DisplayName": "GameCama",
+      "fov": 45,
+      "materialDef": {
+        "alpha": 1,
+        "ambient": {
+          "b": 1,
+          "g": 1,
+          "r": 1
+        },
+        "color": {
+          "b": 1,
+          "g": 1,
+          "r": 1
+        },
+        "emit": {
+          "b": 0,
+          "g": 0,
+          "r": 0
+        },
+        "layers": [
+          {
+            "alpha": 1,
+            "blendMode": 0,
+            "mapInput": 0,
+            "mapTo": 1,
+            "offsetx": 0,
+            "offsety": 0,
+            "rot": 0,
+            "scalex": 5.3,
+            "scaley": 6.1,
+            "src": "/adl/sandbox/DnNE31e3uvYptRYw//vwfDataManager.svc/texture?UID=brick.jpg"
+          }
+        ],
+        "morphTargets": false,
+        "reflect": 0.1,
+        "shininess": 0.2,
+        "side": 0,
+        "skinning": false,
+        "specularColor": {
+          "b": 0.0666666666666667,
+          "g": 0.0666666666666667,
+          "r": 0.0666666666666667
+        },
+        "specularLevel": 1,
+        "type": "phong"
+      },
+      "owner": "Rob",
+      "quaternion": [
+        -0.7071068286895752,
+        0,
+        0,
+        0.7071067094802856
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        -1.3078633287477714E-7,
+        -0.9999998807907104,
+        0,
+        0,
+        0.9999998807907104,
+        -1.3078633287477714E-7,
+        0,
+        0.011422243900597095,
+        -1.155956506729126,
+        11.91999340057373,
+        1
+      ],
+      "translation": [
+        0.011422243900597095,
+        -1.155956506729126,
+        11.91999340057373
+      ]
+    },
+    "random": {
+      "c": 1,
+      "s0": 0.293749240227044,
+      "s1": 0.289425936760381,
+      "s2": 0.0649766458664089
+    },
+    "sequence": 0,
+    "source": "vwf/model/threejs/camera.js",
+    "type": "subDriver/threejs",
+    "name": "58faf29-3658-392-e779-44d7f701f192"
+  },
+  {
+    "children": {
+      "1e8f40f1-7ad6-f731-62d0-65bccbc91286": {
+        "extends": "SandboxCamera.vwf",
+        "properties": {
+          "DisplayName": "Camera1",
+          "owner": "Rob",
+          "transform": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0.8660255670547485,
+            -0.5000000596046448,
+            0,
+            0,
+            0.5000000596046448,
+            0.8660255670547485,
+            0,
+            -0.1387643814086914,
+            -1.1550631523132324,
+            1.225171446800232,
+            1
+          ],
+          "translation": [
+            -0.1387643814086914,
+            -1.1550631523132324,
+            1.225171446800232
+          ]
+        },
+        "random": {
+          "c": 1,
+          "s0": 0.66005057701841,
+          "s1": 0.261992189334705,
+          "s2": 0.890604599611834
+        },
+        "sequence": 0,
+        "source": "vwf/model/threejs/camera.js",
+        "type": "subDriver/threejs",
+        "name": "1e8f40f1-7ad6-f731-62d0-65bccbc91286"
+      },
+      "6b6e6aa3-bab7-9e12-16e1-3e54f035c875": {
+        "extends": "SandboxParticleSystem.vwf",
+        "methods": {
+          "hide": {
+            "body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                this.visible = false;\n",
+            "parameters": []
+          }
+        },
+        "properties": {
+          "DisplayName": "ParticleSystem1",
+          "additive": true,
+          "damping": 0.71,
+          "depthTest": false,
+          "endColor": [
+            0,
+            0,
+            0,
+            0.19
+          ],
+          "endSize": 0.37,
+          "gravity": 0.01,
+          "image": "/adl/sandbox/p7jjNfdWCRtxqLAE//vwfDataManager.svc/texture?UID=fire.jpg",
+          "mamSpin": 3.3,
+          "maxAcceleration": [
+            0,
+            0,
+            0
+          ],
+          "maxLifeTime": 33,
+          "maxOrientation": 15.7,
+          "maxRate": 10000000.001,
+          "maxVelocity": [
+            -1,
+            -1,
+            -0.0056999999999981735
+          ],
+          "minAcceleration": [
+            0,
+            0,
+            0
+          ],
+          "minLifeTime": 33,
+          "minOrientation": -22.5,
+          "minSpin": -9.3,
+          "minVelocity": [
+            1,
+            1,
+            0.1
+          ],
+          "owner": "Rob",
+          "solver": "Analytic",
+          "startSize": 0.86,
+          "transform": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "type": "ParticleSystem",
+          "velocityMode": "spherical",
+          "visible": false
+        },
+        "random": {
+          "c": 1,
+          "s0": 0.750982497818768,
+          "s1": 0.964711369713768,
+          "s2": 0.593375997850671
+        },
+        "sequence": 0,
+        "name": "6b6e6aa3-bab7-9e12-16e1-3e54f035c875"
+      }
+    },
+    "extends": "sphere2.vwf",
+    "methods": {
+      "Die": {
+        "body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                                                                    this.audioAPI.playSound(\"./vwfdatamanager.svc/datafile/XAPIGame/explode.mp3\", false, 100);\n\n                                                                                                                                                                                                                                                                                                                                                        this.Scene.children_by_name.GameCode.paused = true;\n                                                                                                                                                                                                                                                                                                                                                        this.children_by_name.ParticleSystem1.visible = true;\n                                                                                                                                                                                                                                                                                                                                                        this.children_by_name.ParticleSystem1.future(.5).hide();\n                                                                                                                                                                                                                                                                                                                                                        this.children_by_name.ParticleSystem1.maxVelocity[2] += .0001;\n                                                                                                                                                                                                                                                                                                                                                        this.visible = false;\n                                                                                                                                                                                                                                                                                                                                                        this.future(2).reset();\n                                                                                                                                                                                                                                                                                                                                                        alertify.error('You died!', function() {\n\n                                                                                                                                                                                                                                                                                                                                                        }.bind(this));\n",
+        "parameters": []
+      },
+      "ready": {
+        "body": "\n\n\n\n\n\n\n\n\n\n\n\n                        this.Scene.unbind('keyDown', this.keydownfunc);\n                            this.Scene.unbind('keyUp', this.keyupfunc);\n\n                            var self = this;\n                            this.keydownfunc = function(keyData)\n                            {\n                                console.log(keyData);\n                                self.lastKeyDown = keyData.key.char;\n                                if (keyData.key.char == 'W')\n                                    self.movement = [0, .2, 0];\n                                if (keyData.key.char == 'S')\n                                    self.movement = [0, -.2, 0];\n                                if (keyData.key.char == 'A')\n                                    self.movement = [-.2, 0, 0];\n                                if (keyData.key.char == 'D')\n                                    self.movement = [.2, 0, 0];\n                            };\n\n                            this.keyupfunc = function(keyData)\n                            {\n                                if (keyData.key && keyData.key.char == self.lastKeyDown)\n                                    self.movement = [0, 0, 0];\n                            };\n\n                            this.Scene.bind('keyDown', this.keydownfunc);\n                            this.Scene.bind('keyUp', this.keyupfunc);\n\n                            //This function was created for you by the system. \n                            //The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n",
+        "parameters": []
+      },
+      "reset": {
+        "body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                                            this.Scene.children_by_name.GameCode.paused = false;\n                                                                                                                                                                                                                                                                                                                                var origin = this.Scene.placemarks.startpoint.internal_val;\n                                                                                                                                                                                                                                                                                                                                this.transformAPI.setPosition(origin[0], origin[1], origin[2] + .5);\n                                                                                                                                                                                                                                                                                                                                this.children_by_name.ParticleSystem1.visible = false;\n                                                                                                                                                                                                                                                                                                                                this.visible = true;\n                                                                                                                                                                                                                                                                                                                                this.timer = 0;\n                                                                                                                                                                                                                                                                                                                                this.Scene.children_by_name.GameCode.postStart(_UserManager.GetCurrentUserName());\n                                                                                                                                                                                                                                                                                                                                this.Scene.children_by_name.GameCode.reset();\n",
+        "parameters": []
+      },
+      "tick": {
+        "body": "\n\n\n\n\n\n\n              if (this.Scene.children_by_name.GameCode.paused === true) return;\n                  //This function was created for you by the system. \n                  //The tick function is called 20 times every second. \n                  // Write code here to animate over time\n                  var hits = this.tryMove(this.movement);\n\n                  if (!hits)\n                      this.transformAPI.move(this.movement[0], this.movement[1], this.movement[2]);\n                  else\n                  {   \n                      /*\n                      var trans = this.transformAPI.getPosition();\n                      var left = 0,\n                          right = 0,\n                          up = 0,\n                          down = 0;\n                      for (var i = 0; i < hits.length; i++)\n                      {\n                          if (hits[i].point[0] > trans[0]) left--;\n                          if (hits[i].point[0] < trans[0]) right++;\n                          if (hits[i].point[1] > trans[1]) up--;\n                          if (hits[i].point[1] < trans[1]) down++;\n                      }\n\n                      left = left / hits.length;\n                      right = right / hits.length;\n                      up = up / hits.length;\n                      down = down / hits.length;\n\n                      this.transformAPI.move((left + right) / 55 * (this.movement[0] == 0 ? 1 : 0), (up + down) / 55 * (this.movement[1] == 0 ? 1 : 0), 0);\n                      console.log(left, right, up, down); */\n                  }\n                  this.timer += 1.0 / 30.0;\n",
+        "parameters": []
+      },
+      "tryMove": {
+        "body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                        if (Vec3.magnitude(dir) == 0) return false;\n\n                                                                                            var transform = this.translation.internal_val;\n                                                                                            var newpos = Vec3.add(transform, dir.internal_val, []);\n                                                                                            var hits = _SceneManager.SphereCast(newpos, .25,\n                                                                                            {\n                                                                                                OneHitPerMesh: false,\n                                                                                                ignore: [_dSky, _Editor.findviewnode(this.id)]\n                                                                                            });\n\n                                                                                            if (hits && hits.length)\n                                                                                            {\n\n                                                                                                return hits;\n                                                                                            }\n                                                                                            return false;\n",
+        "parameters": [
+          "dir"
+        ]
+      }
+    },
+    "properties": {
+      "DisplayName": "Player",
+      "materialDef": {
+        "alpha": 1,
+        "ambient": {
+          "b": 1,
+          "g": 0,
+          "r": 0.0823529411764706
+        },
+        "color": {
+          "a": 1,
+          "b": 1,
+          "g": 0,
+          "r": 0.0823529411764706
+        },
+        "emit": {
+          "b": 0,
+          "g": 0,
+          "r": 0
+        },
+        "layers": [],
+        "morphTargets": false,
+        "reflect": 0.8,
+        "shadeless": false,
+        "shadow": true,
+        "shininess": 15,
+        "skinning": false,
+        "specularColor": {
+          "b": 0.577350269189626,
+          "g": 0.577350269189626,
+          "r": 0.577350269189626
+        },
+        "specularLevel": 1,
+        "type": "phong"
+      },
+      "movement": [
+        0,
+        0,
+        0
+      ],
+      "owner": "Rob",
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "radius": 0.4,
+      "size": [
+        0.5,
+        1,
+        1
+      ],
+      "tempid": "",
+      "texture": "checker.jpg",
+      "time": 0,
+      "timer": 18.1000000000001,
+      "transform": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -4.453024864196777,
+        -1.2624917030334473,
+        0.6100000143051147,
+        1
+      ],
+      "translation": [
+        -4.453024864196777,
+        -1.2624917030334473,
+        0.6100000143051147
+      ],
+      "type": "Primitive",
+      "visible": true
+    },
+    "random": {
+      "c": 1,
+      "s0": 0.489484123885632,
+      "s1": 0.787186275236309,
+      "s2": 0.766554398229346
+    },
+    "sequence": 0,
+    "source": "vwf/model/threejs/sphere.js",
+    "type": "subDriver/threejs",
+    "name": "d7ab6422-9b04-f46f-9247-620e3217770e"
+  },
+  {
+    "children": {
+      "6d482e8-f3cf-eeee-ce28-77c685817e46": {
+        "children": {
+          "d7355484-de05-9a75-373c-bccd741374d7": {
+            "extends": "rotator.vwf",
+            "properties": {
+              "Active": true,
+              "DisplayName": "rotator1",
+              "Local": true,
+              "owner": "Rob",
+              "type": "behavior"
+            },
+            "random": {
+              "c": 1,
+              "s0": 0.374866498634219,
+              "s1": 0.831964534241706,
+              "s2": 0.533414667937905
+            },
+            "sequence": 0,
+            "name": "d7355484-de05-9a75-373c-bccd741374d7"
+          }
+        },
+        "extends": "cone2.vwf",
+        "properties": {
+          "DisplayName": "cone1",
+          "height": 0.69,
+          "materialDef": {
+            "shininess": 15,
+            "alpha": 1,
+            "ambient": {
+              "r": 0,
+              "g": 0.6705882352941176,
+              "b": 0.09019607843137255
+            },
+            "color": {
+              "r": 0,
+              "g": 0.6705882352941176,
+              "b": 0.09019607843137255,
+              "a": 1
+            },
+            "emit": {
+              "r": 0,
+              "g": 0,
+              "b": 0
+            },
+            "reflect": 0.8,
+            "shadeless": false,
+            "shadow": true,
+            "specularColor": {
+              "r": 0.5773502691896258,
+              "g": 0.5773502691896258,
+              "b": 0.5773502691896258
+            },
+            "specularLevel": 1,
+            "layers": [],
+            "morphTargets": false,
+            "skinning": false,
+            "type": "phong"
+          },
+          "owner": "Rob",
+          "radius": 0.33,
+          "rsegs": 3,
+          "size": [
+            0.5,
+            1,
+            0.5
+          ],
+          "tempid": "",
+          "texture": "checker.jpg",
+          "transform": [
+            -0.6844872236251831,
+            -0.6128361821174622,
+            0.3948557674884796,
+            0,
+            -0.7289171814918518,
+            0.5854766368865967,
+            -0.35485678911209106,
+            0,
+            -0.01371348462998867,
+            -0.5307013988494873,
+            -0.8474491238594055,
+            0,
+            -2.9802322831784522E-9,
+            0.0317564494907856,
+            1.367362141609192,
+            1
+          ],
+          "translation": [
+            -2.9802322831784522E-9,
+            0.0317564494907856,
+            1.367362141609192
+          ],
+          "type": "Primitive"
+        },
+        "random": {
+          "c": 1,
+          "s0": 0.673546148231253,
+          "s1": 0.329978154040873,
+          "s2": 0.257451710291207
+        },
+        "sequence": 0,
+        "source": "vwf/model/threejs/cone.js",
+        "type": "subDriver/threejs",
+        "name": "6d482e8-f3cf-eeee-ce28-77c685817e46"
+      },
+      "f280a341-263e-dd03-9dcc-9beb6d0a4243": {
+        "extends": "hoverlabel.vwf",
+        "properties": {
+          "DisplayName": "hoverlabel1",
+          "color": [
+            1,
+            0.9019607843137255,
+            0
+          ],
+          "offset3D": [
+            0,
+            0,
+            0.9
+          ],
+          "owner": "Rob",
+          "text": "Goal!",
+          "textsize": 47,
+          "type": "behavior"
+        },
+        "random": {
+          "c": 1,
+          "s0": 0.235764436423779,
+          "s1": 0.838487991364673,
+          "s2": 0.67600059369579
+        },
+        "sequence": 0,
+        "name": "f280a341-263e-dd03-9dcc-9beb6d0a4243"
+      }
+    },
+    "extends": "cylinder2.vwf",
+    "methods": {
+      "playWinSound": {
+        "body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                      this.audioAPI.stopSound(\"./vwfdatamanager.svc/datafile/XAPIGame/win.mp3\");\n                                                                                                                                                                                                                                                                                                          this.audioAPI.playSound(\"./vwfdatamanager.svc/datafile/XAPIGame/win.mp3\", false, 100);\n",
+        "parameters": []
+      },
+      "tick": {
+        "body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                        if (Vec3.distance(this.transformAPI.getPosition(), this.Scene.children_by_name.Player.transformAPI.getPosition()) < .8)\n                                                                                                                                                                                                                                                                                                            {\n                                                                                                                                                                                                                                                                                                                alertify.alert(\"You Win!\");\n                                                                                                                                                                                                                                                                                                                this.Scene.children_by_name.GameCode.postSuccess();\n                                                                                                                                                                                                                                                                                                                this.Scene.children_by_name.Player.reset();\n                                                                                                                                                                                                                                                                                                                \n                                                                                                                                                                                                                                                                                                            }\n",
+        "parameters": []
+      }
+    },
+    "properties": {
+      "DisplayName": "cylinder1",
+      "height": 0.26,
+      "materialDef": {
+        "alpha": 1,
+        "ambient": {
+          "b": 0.0901960784313725,
+          "g": 0.670588235294118,
+          "r": 0
+        },
+        "color": {
+          "a": 1,
+          "b": 0.0901960784313725,
+          "g": 0.670588235294118,
+          "r": 0
+        },
+        "emit": {
+          "b": 0,
+          "g": 0,
+          "r": 0
+        },
+        "layers": [],
+        "morphTargets": false,
+        "reflect": 0.8,
+        "shadeless": false,
+        "shadow": true,
+        "shininess": 15,
+        "skinning": false,
+        "specularColor": {
+          "b": 0.577350269189626,
+          "g": 0.577350269189626,
+          "r": 0.577350269189626
+        },
+        "specularLevel": 1,
+        "type": "phong"
+      },
+      "owner": "Rob",
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "radius": 0.46,
+      "rsegs": 8,
+      "size": [
+        1,
+        0.5,
+        0.5
+      ],
+      "tempid": "",
+      "texture": "checker.jpg",
+      "transform": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0.5999990701675415,
+        2.999999761581421,
+        0.0010000000474974513,
+        1
+      ],
+      "translation": [
+        0.5999990701675415,
+        2.999999761581421,
+        0.0010000000474974513
+      ],
+      "type": "Primitive"
+    },
+    "random": {
+      "c": 1,
+      "s0": 0.723132537910715,
+      "s1": 0.637780156685039,
+      "s2": 0.0355265494436026
+    },
+    "sequence": 0,
+    "source": "vwf/model/threejs/cylinder.js",
+    "type": "subDriver/threejs",
+    "name": "df9935e2-56fa-59c0-5a00-3306185e5bd8"
+  },
+  {
+    "clients": {
+      "Llljl110sPN6iRCcNaBb": {
+        "cid": "Llljl110sPN6iRCcNaBb",
+        "name": "Rob"
+      }
+    },
+    "DisplayName": null,
+    "placemarks": {
+      "Origin": {
+        "0": -6.934999942779541,
+        "1": -367,
+        "2": 0
+      },
+      "startpoint": {
+        "0": -4.453024864196777,
+        "1": -1.2624917030334473,
+        "2": 0.10999999940395355
+      }
+    },
+    "navmode": "none",
+    "sunColor": [
+      1,
+      1,
+      1
+    ],
+    "sunDirection": [
+      0.75,
+      0.55,
+      1
+    ],
+    "sunIntensity": 0.8,
+    "ambientColor": [
+      0.35,
+      0.35,
+      0.35
+    ],
+    "fogColor": [
+      1,
+      1,
+      1
+    ],
+    "fogNear": 100,
+    "fogFar": 1000,
+    "fogType": 0,
+    "fogDensity": 0.005,
+    "fogVFalloff": 1.3,
+    "fogVFalloffStart": 0,
+    "skyColorBlend": 1,
+    "skyFogBlend": 0,
+    "skyApexColor": [
+      0.4588235294117647,
+      0.4588235294117647,
+      0.4588235294117647
+    ],
+    "skyHorizonColor": [
+      0.3411764705882353,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "vAtmosphereDensity": 0.0005,
+    "playMode": "stop",
+    "materialDef": {
+      "shininess": 0,
+      "alpha": 0.98,
+      "ambient": {
+        "r": 0.23921568627450981,
+        "g": 0.23921568627450981,
+        "b": 0.23921568627450981
+      },
+      "color": {
+        "r": 0.23921568627450981,
+        "g": 0.23921568627450981,
+        "b": 0.23921568627450981,
+        "a": 1
+      },
+      "emit": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "reflect": 0,
+      "shadeless": false,
+      "shadow": true,
+      "specularColor": {
+        "r": 0.5773502691896258,
+        "g": 0.5773502691896258,
+        "b": 0.5773502691896258
+      },
+      "specularLevel": 1,
+      "layers": {
+        "length": 0
+      },
+      "type": "phong"
+    },
+    "owner": "Rob",
+    "type": "scene",
+    "playBackup": null,
+    "publishSettings": {
+      "SinglePlayer": true,
+      "camera": "SandboxCamera-vwf-58faf29-3658-392-e779-44d7f701f192",
+      "allowAnonymous": true,
+      "createAvatar": false,
+      "allowTools": false
+    }
+  }
+]
