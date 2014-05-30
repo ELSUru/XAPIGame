@@ -27,6 +27,45 @@ $(document.body).append('<link rel="stylesheet" type="text/css" href="/vwfdatama
 $('#gameEditGUI').parent().find('.ui-dialog-titlebar button').css('display','none');
 $('#gameEditGUI').append('<div id="undoButton">Undo</div>');
 $('#gameEditGUI').append('<div id="clearButton">Clear</div>');
+$('#gameEditGUI').append('<div id="gamePlayButton">Play/Pause</div>');
+
+vwf_view.satProperty = function(id,prop,val)
+{
+  if(id == vwf.application() && prop == 'playMode' && val == 'play')
+  {
+   $('.blockTray').css('opacity',.3);
+    $('.blockTray').css('pointer-events','none');
+
+  }
+  if(id == vwf.application() && prop == 'playMode' && val != 'play')
+  {
+    $('.blockTray').css('opacity','');
+    $('.blockTray').css('pointer-events','');
+
+  }
+
+
+}
+
+
+$('#gamePlayButton').button();
+$('#gamePlayButton').click(function()
+{
+  if(vwf.getProperty(vwf.application(),'playMode') == 'play')
+  {
+     _Publisher.stopWorld();
+   
+
+  }else
+  {
+    _Publisher.playWorld();
+    
+  }
+
+
+
+});
+
 $('#undoButton').button();
 $('#undoButton').click(function()
 	{
