@@ -148,7 +148,7 @@ function postCreateEvent(Type,Name,Position)
         new ADL.XAPIStatement.Verb('http://vwf.adlnet.gov/xapi/verbs/rezzed', 'rezzed'),
         new ADL.XAPIStatement.Activity(creationId, Name)
     );
-	statement.addParentActivity(new ADL.XAPIStatement.Activity(worldId));
+	statement.addParentActivity(new ADL.XAPIStatement.Activity(worldId, _DataManager.getInstanceData().title || 'tempPublish'));
     statement.context.extensions = 
     {
         "http://vwf.adlnet.gov/xapi/IFestGame2014": {'GameType':Type},
