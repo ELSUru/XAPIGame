@@ -31,17 +31,30 @@ $('#gameEditGUI').append('<div id="gamePlayButton">Play/Pause</div>');
 
 vwf_view.satProperty = function(id,prop,val)
 {
+ 
   if(id == vwf.application() && prop == 'playMode' && val == 'play')
   {
-   $('.blockTray').css('opacity',.3);
+     
+    $('.blockTray').css('opacity',.3);
     $('.blockTray').css('pointer-events','none');
-
+    $('#gameEditGUI').parent().css('border','none');
+    $('#gameEditGUI').parent().css('background','none');
+    $('#gameEditGUI').parent().children(":not(#gameEditGUI)").css('display','none');
+    $('#gameEditGUI').children(":not(#gamePlayButton)").css('display','none');
+    $('#gameEditGUI').dialog('option','position',[0,0]);
+   $('#gamePlayButton span').text('pause');
+     
   }
   if(id == vwf.application() && prop == 'playMode' && val != 'play')
   {
+     
     $('.blockTray').css('opacity','');
     $('.blockTray').css('pointer-events','');
-
+    $('#gameEditGUI').parent().css('border','');
+    $('#gameEditGUI').parent().css('background','');
+    $('#gameEditGUI').parent().children(":not(#gameEditGUI)").css('display','');
+    $('#gameEditGUI').children(":not(#gamePlayButton)").css('display','');
+   $('#gamePlayButton span').text('play');
   }
 
 
@@ -51,6 +64,7 @@ vwf_view.satProperty = function(id,prop,val)
 $('#gamePlayButton').button();
 $('#gamePlayButton').click(function()
 {
+
   if(vwf.getProperty(vwf.application(),'playMode') == 'play')
   {
      _Publisher.stopWorld();
