@@ -22,7 +22,9 @@ $('#gameEditGUI').dialog({
 	width:400
 });
 
-$(document.body).append('<link rel="stylesheet" type="text/css" href="/vwfdatamanager.svc/datafile/XAPIGame/styles.css">')
+$(document.body).append('<link rel="stylesheet" type="text/css" href="/vwfdatamanager.svc/datafile/XAPIGame/styles.css">');
+
+$(document.head).append('<script type="text/javascript" src="/vwfdatamanager.svc/datafile/XAPIGame/tutorial.js">')
 
 $('#gameEditGUI').parent().find('.ui-dialog-titlebar button').css('display','none');
 $('#gameEditGUI').append('<div id="undoButton">Undo</div>');
@@ -52,7 +54,7 @@ $('#ChaseCam').click(function(){
 
 vwf_view.satProperty = function(id,prop,val)
 {
- 
+  _Tutorial.satProperty(id,prop,val);
   if(id == vwf.application() && prop == 'playMode' && val == 'play')
   {
      
@@ -89,12 +91,12 @@ $('#gamePlayButton').click(function()
   if(vwf.getProperty(vwf.application(),'playMode') == 'play')
   {
      _Publisher.stopWorld();
-   
+    _Tutorial.paused(); 
 
   }else
   {
     _Publisher.playWorld();
-    
+    _Tutorial.played();
   }
 
 
@@ -105,6 +107,7 @@ $('#undoButton').button();
 $('#undoButton').click(function()
 	{
 		_UndoManager.undo();
+    _Tutorial.undid();
 		var lastAction = undoStack.pop();
 		if(lastAction == TRAPDOOR)
 			$($('.createDoor:hidden')[0]).css('display','inline-block');
@@ -122,6 +125,7 @@ $('#undoButton').click(function()
 $('#clearButton').button();
 $('#clearButton').click(function()
 	{
+    _Tutorial.cleared();
 		var objects = vwf.models.object.objects;
 		$('.createWaypoint').css('display','inline-block');
 		$('.createFire').css('display','inline-block');
@@ -513,6 +517,8 @@ function dropFire(e)
 	$(dragElement).css('display','none');
 	$('#index-vwf').focus();
 	postCreateEvent('fireTrap',fireTrap.properties.DisplayName,fireTrap.properties.translation);
+
+  _Tutorial.createdFire();
 	return true;
 
 }
@@ -580,6 +586,7 @@ function dropLaser(e)
 	$(dragElement).css('display','none');
 	$('#index-vwf').focus();
 	postCreateEvent('laserTrap',laserTrap.properties.DisplayName,laserTrap.properties.translation);
+  _Tutorial.createdLaser();
 	return true;
 
 }
@@ -647,6 +654,7 @@ function dropDoor(e)
 	$('#index-vwf').focus();
 	$(dragElement).css('display','none');
 	postCreateEvent('Trapdoor',doorTrap.properties.DisplayName,doorTrap.properties.translation);
+  _Tutorial.createdDoor();
 	return true;
 
 }
@@ -699,6 +707,7 @@ function dropWaypoint(e)
 	$('#index-vwf').focus();
 	$(dragElement).css('display','none');
 	postCreateEvent('WayPoint',wayPoint.properties.DisplayName,wayPoint.properties.translation);
+  _Tutorial.createdWaypoint();
 	return true;
 
 }
@@ -753,6 +762,7 @@ function dropEnemy(e)
 	$('#index-vwf').focus();
 	$(dragElement).css('display','none');
 	postCreateEvent('Enemy',Enemy.properties.DisplayName,Enemy.properties.startingLocation);
+  _Tutorial.createdEnemy();
 	return true;
 
 }
