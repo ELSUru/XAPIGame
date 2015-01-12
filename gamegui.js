@@ -538,6 +538,7 @@ function dropFire(e)
 function dropLaser(e)
 {
 
+
 	undoStack.push(LASER);
 	console.log(e);
 	var insetpoint = _Editor.GetInsertPoint(e);
