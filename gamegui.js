@@ -52,6 +52,17 @@ $('#ChaseCam').click(function(){
   _dView.setCamera("SandboxCamera-vwf-1e8f40f1-7ad6-f731-62d0-65bccbc91286")
 });
 
+vwf_view.calledMethod = function(nodeID,methodName)
+{
+     if(methodName == 'Die')
+     {
+      _Tutorial.died();
+     }
+     if(methodName == 'Win')
+     {
+      _Tutorial.win();
+     }
+}
 vwf_view.satProperty = function(id,prop,val)
 {
   _Tutorial.satProperty(id,prop,val);
@@ -236,6 +247,7 @@ $(document).on('setstatecomplete')
 
 		}
 		$('#index-vwf').focus();
+    _Tutorial.runTutorial();
 
 }
 

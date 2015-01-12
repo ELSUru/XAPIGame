@@ -54,6 +54,10 @@ window._Tutorial = new(function() {
     this.nextClicked = function() {
         this.event('next');
     }
+    this.died = function()
+    {
+    	this.event('died');
+    }
     this.event = function(eventname, param) {
         if (this.nextEvent && this.nextEvent.name == eventname) {
             //if the event has a check function
@@ -86,7 +90,7 @@ window._Tutorial = new(function() {
     //set the next condition the system is waiting for in order
     this.setNextEvent = function(event) {
         this.nextEvent = event;
-        if (this.nextEvent.timeout) {
+        if (this.nextEvent && this.nextEvent.timeout) {
             this.nextEvent.timer = window.setTimeout(function() {
                 _Tutorial.nextEvent.timeout();
                 this.nextEvent.timer = null;
@@ -128,7 +132,7 @@ window._Tutorial = new(function() {
         $(document.body).append('<div id="tutorialRoot" />');
         $('#tutorialRoot').load('/vwfdatamanager.svc/datafile/XAPIGame/prompts.html', function() {
 
-
+        	$('#tutorialCancel').click(_Tutorial.cancelTutorial);
             async.series([
 
                 function(cb) {
@@ -162,8 +166,10 @@ window._Tutorial = new(function() {
                     },10000)
                 },
                 function(cb) {
+                	$('#gameEditGUI').parent().css('left','70%');
                     _Tutorial.hint('Create any kind of trap', 'Drag a trap from your palet onto the game board.', function(ok) {
                         _Tutorial.nextClicked();
+                        //make trap for them here
                     });
                     _Tutorial.setNextEvent(new Event('createdTrap', cb));
                 },
@@ -174,6 +180,7 @@ window._Tutorial = new(function() {
                     _Tutorial.setNextEvent(new Event('next', cb));
                 },
                 function(cb) {
+                	_Tutorial.setNextEvent(null);
                 	$('.tutorialbackground').fadeOut();
                     $('.tutorialprompt').fadeOut();
                     $('#gamePlayButton').click();
@@ -202,19 +209,44 @@ window._Tutorial = new(function() {
                 },
                 function(cb) {
                     _Tutorial.hint('Clear the board', 'You can clear the board with the clear button.', function(ok) {
-                        _Tutorial.nextClicked();
+                        _Tutorial.nextEvent.cb();
                     });
                     _Tutorial.setNextEvent(new Event('cleared', cb));
                 },
+                function(cb) {
+                	
+                    _Tutorial.prompt('Play/Pause', 'Up until this point, we`ve been starting the game for you. Now that you know how to play, and how to set traps yourself, you can do it on your own.', function(ok) {
+                        _Tutorial.nextClicked();
+                    });
+                    _Tutorial.setNextEvent(new Event('next', cb));
+                },
+                function(cb) {
+                    _Tutorial.hint('Click Play', 'On the palet, find the `Play/Pause` button and click it. The game should start playing', function(ok) {
+                        _Tutorial.nextEvent.cb();
+                    });
+                    _Tutorial.setNextEvent(new Event('played', cb));
+                },
+                function(cb) {
+                    _Tutorial.hint('Click Stop', 'On the palet, find the `Play/Pause` button and click it. The game should pause.', function(ok) {
+                        _Tutorial.nextEvent.cb();
+                    });
+                    _Tutorial.setNextEvent(new Event('paused', cb));
+                },
+                function(cb) {
+                	
+                    _Tutorial.prompt('Build your level', 'That`s it! You now know how to build your game level. When you`re happy with your design, just leave the page. The instructor or reference card will help you publish your world.', function(ok) {
+                        _Tutorial.nextClicked();
+                    });
+                    _Tutorial.setNextEvent(new Event('next', cb));
+                },
             ], function(err) {
-                alertify.alert('the tutorial is over', function(ok) {
-                    _Tutorial.nextClicked();
-                });
+                _Tutorial.cancelTutorial();
             })
         })
     }
     this.cancelTutorial = function() {
-
+    	$('#tutorialRoot').empty();
+        $('#tutorialRoot').remove();
     }
 
 
