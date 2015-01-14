@@ -58,6 +58,10 @@ window._Tutorial = new(function() {
     {
     	this.event('died');
     }
+    this.won = function()
+    {
+        this.event('won');
+    }
     this.event = function(eventname, param) {
         if (this.nextEvent && this.nextEvent.name == eventname) {
             //if the event has a check function
@@ -149,9 +153,7 @@ window._Tutorial = new(function() {
                     _Tutorial.setNextEvent(new Event('next', cb));
                     $('.tutorialbackground').fadeOut();
                     $('#gameEditGUI').parent().hide();
-                    window.setTimeout(function(){
-                    	_Tutorial.nextClicked();
-                    },5000)
+                    
                 },
                 function(cb) {
                     $('.tutorialbackground').fadeIn();
@@ -161,10 +163,11 @@ window._Tutorial = new(function() {
                     });
                     _Tutorial.setNextEvent(new Event('next', cb));
                     $('.tutorialbackground').fadeOut();
-                    $('#gameEditGUI').parent().animate({left:'70%'},7000);
-                    window.setTimeout(function(){
-                    	_Tutorial.nextClicked();
-                    },10000)
+                    $('#gameEditGUI').parent().animate({left:'70%'},7000,function()
+                        {
+                            _Tutorial.nextClicked();
+                        });
+                    
                 },
                 function(cb) {
                 	//possibly wait for 'trymove' VWF event here to see they actually were able to move
@@ -179,16 +182,20 @@ window._Tutorial = new(function() {
                 	//maybe use the event timeout function here. Note that canceling tutorial at this point will leave this timeout 
                 	_Tutorial.setNextEvent(null);
                 	$('#gamePlayButton').click();
-                	$('.tutorialbackground').fadeOut();
-                    $('.tutorialprompt').fadeOut();
+                	//$('.tutorialbackground').fadeOut();
+                    //$('.tutorialprompt').fadeOut();
                     $('#gamePlayButton').click();
-                    window.setTimeout(function(){cb();},10000);
+                    $('#tutorialNext').text('Skip');
+                    _Tutorial.hint('Playing the Game', 'Use the WASD keys to move around. Drive to the goal.', function(ok) {
+                        vwf_view.kernel.callMethod('sphere2-vwf-d7ab6422-9b04-f46f-9247-620e3217770e','Win')
+                    });
+                     _Tutorial.setNextEvent(new Event('won', cb));
                 },
                 function(cb) {
                 	
                 	$('#gamePlayButton').click();
-                	$('.tutorialbackground').fadeIn();
-                    $('.tutorialprompt').fadeIn();
+                	//$('.tutorialbackground').fadeIn();
+                    //$('.tutorialprompt').fadeIn();
                 	$('#tutorialNext').text('Do it for me!');
                     _Tutorial.hint('Create any kind of trap', 'Ok, that was too easy! Drag a trap from your palet onto the game board.', function(ok) {
                        

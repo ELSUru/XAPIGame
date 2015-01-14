@@ -54,6 +54,7 @@ $('#ChaseCam').click(function(){
 
 vwf_view.calledMethod = function(nodeID,methodName)
 {
+    
      if(methodName == 'Die')
      {
       _Tutorial.died();
@@ -62,6 +63,8 @@ vwf_view.calledMethod = function(nodeID,methodName)
      {
       _Tutorial.win();
      }
+     if(methodName == 'playWinSound')
+      _Tutorial.won();
 }
 vwf_view.satProperty = function(id,prop,val)
 {
