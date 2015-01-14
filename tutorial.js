@@ -158,7 +158,7 @@ window._Tutorial = new(function() {
                 function(cb) {
                     $('.tutorialbackground').fadeIn();
                     $('#gameEditGUI').parent().show();
-                     _Tutorial.hint('The Pallet', 'This is the pallet. Each item in this pallet can be dragged and dropped onto the game board.', function(ok) {
+                     _Tutorial.hint('The Palette', 'This is the palette. Each item in this palette can be dragged and dropped onto the game board.', function(ok) {
                         _Tutorial.nextClicked();
                     });
                     _Tutorial.setNextEvent(new Event('next', cb));
@@ -197,7 +197,7 @@ window._Tutorial = new(function() {
                 	//$('.tutorialbackground').fadeIn();
                     //$('.tutorialprompt').fadeIn();
                 	$('#tutorialNext').text('Do it for me!');
-                    _Tutorial.hint('Create any kind of trap', 'Ok, that was too easy! Drag a trap from your pallet onto the game board.', function(ok) {
+                    _Tutorial.hint('Create any kind of trap', 'Ok, that was too easy! Drag a trap from your palette onto the game board.', function(ok) {
                        
                        var x = 547/1920 * $(window).width();
                        var y = 834/1017 * $(window).height();
@@ -227,7 +227,7 @@ window._Tutorial = new(function() {
                 function(cb) {
                 	$('#tutorialNext').text('Next');
                     $('#gamePlayButton').click();
-                    _Tutorial.prompt('Clear the board', 'You can clear the board with the clear button. This return all the traps to the pallet so you can use them again. Since you only have a limited number of traps, you must use the carefully!', function(ok) {
+                    _Tutorial.prompt('Clear the board', 'You can clear the board with the clear button. This return all the traps to the palette so you can use them again. Since you only have a limited number of traps, you must use the carefully!', function(ok) {
                         _Tutorial.nextClicked();
                     });
                     _Tutorial.setNextEvent(new Event('next', cb));
@@ -248,13 +248,13 @@ window._Tutorial = new(function() {
                 },
                 function(cb) {
                 	$('#tutorialNext').text('Skip');
-                    _Tutorial.hint('Click Play', 'On the pallet, find the `Play/Pause` button and click it. The game should start playing.', function(ok) {
+                    _Tutorial.hint('Click Play', 'On the palette, find the `Play/Pause` button and click it. The game should start playing.', function(ok) {
                          $('#gamePlayButton').click();
                     });
                     _Tutorial.setNextEvent(new Event('played', cb));
                 },
                 function(cb) {
-                    _Tutorial.hint('Click Stop', 'On the pallet, find the `Play/Pause` button and click it. The game should pause.', function(ok) {
+                    _Tutorial.hint('Click Stop', 'On the palette, find the `Play/Pause` button and click it. The game should pause.', function(ok) {
                         $('#gamePlayButton').click();
                     });
                     _Tutorial.setNextEvent(new Event('paused', cb));
