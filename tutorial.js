@@ -129,6 +129,8 @@ window._Tutorial = new(function() {
             top: '80%',
             left: '59%'
         });
+        $('.tutorialprompt').hide();
+        $('.tutorialprompt').fadeIn();
         $('.tutorialprompt .header').text(title);
         $('.tutorialprompt .text').text(text);
         $('.tutorialprompt img').hide();
@@ -195,7 +197,7 @@ window._Tutorial = new(function() {
                     $("#gamePlayButton").click();
                     $("#tutorialNext").text("Skip");
                     _Tutorial.hint("Playing the Game", "Use the WASD keys to move around. Drive to the goal.", function(ok) {
-                        vwf_view.kernel.callMethod("sphere2-vwf-d7ab6422-9b04-f46f-9247-620e3217770e","Win")
+                        vwf_view.kernel.callMethod("sphere2-vwf-d7ab6422-9b04-f46f-9247-620e3217770e","playWinSound")
                     });
                      _Tutorial.setNextEvent(new Event("won", cb));
                 },
