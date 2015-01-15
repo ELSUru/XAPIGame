@@ -149,26 +149,26 @@ window._Tutorial = new(function() {
                     _Tutorial.prompt('Welcome!', "This brief tutorial will show you how to use the game editor. When you're done, you can build you own games! If you've seen this before, or you already know what to do, click 'cancel tutorial' at any time to exit.", pathRoot+'Tutorial1.png', function(ok) {
                         _Tutorial.nextClicked();
                     });
-                    _Tutorial.setNextEvent(new Event('next', cb));
+                    _Tutorial.setNextEvent(new Event("next", cb));
                 },
                 function(cb) {
-                    _Tutorial.hint('The Game Board', 'This game board is where you\'ll lay out your level.', function(ok) {
+                    _Tutorial.hint("The Game Board", "This game board is where you'll lay out your level.", function(ok) {
                         _Tutorial.nextClicked();
                     });
-                    _Tutorial.setNextEvent(new Event('next', cb));
-                    $('.tutorialbackground').fadeOut();
-                    $('#gameEditGUI').parent().hide();
+                    _Tutorial.setNextEvent(new Event("next", cb));
+                    $(".tutorialbackground").fadeOut();
+                    $("#gameEditGUI").parent().hide();
                     
                 },
                 function(cb) {
-                    $('.tutorialbackground').fadeIn();
-                    $('#gameEditGUI').parent().show();
-                     _Tutorial.hint('The Palette', 'This is the palette. Each item in this palette can be dragged and dropped onto the game board.', function(ok) {
+                    $(".tutorialbackground").fadeIn();
+                    $("#gameEditGUI").parent().show();
+                     _Tutorial.hint("The Palette", "This is the palette. Each item in this palette can be dragged and dropped onto the game board.", function(ok) {
                         _Tutorial.nextClicked();
                     });
-                    _Tutorial.setNextEvent(new Event('next', cb));
-                    $('.tutorialbackground').fadeOut();
-                    $('#gameEditGUI').parent().animate({left:'70%'},7000,function()
+                    _Tutorial.setNextEvent(new Event("next", cb));
+                    $(".tutorialbackground").fadeOut();
+                    $("#gameEditGUI").parent().animate({left:"70%"},7000,function()
                         {
                             _Tutorial.nextClicked();
                         });
@@ -178,38 +178,38 @@ window._Tutorial = new(function() {
                 	//possibly wait for 'trymove' VWF event here to see they actually were able to move
                 	$('#gameEditGUI').parent().stop().css('left','70%');
                 	$('#tutorialNext').text('Next');
-                    _Tutorial.prompt('Playing the Game', 'While the board is clear of obstacles, let\'s try out the game. Use the WASD keys to move around. Drive to the goal.', pathRoot+'Tutorial2.png', function(ok) {
+                    _Tutorial.prompt("Playing the Game", "While the board if clear of obstacles, let's try out the game. Use the WASD keys to move around. Drive to the goal.", pathRoot+'Tutorial2.png', function(ok) {
                         _Tutorial.nextClicked();
                     });
-                    _Tutorial.setNextEvent(new Event('next', cb));
+                    _Tutorial.setNextEvent(new Event("next", cb));
                 },
                 function(cb) {
                 	//maybe use the event timeout function here. Note that canceling tutorial at this point will leave this timeout 
                 	_Tutorial.setNextEvent(null);
-                	$('#gamePlayButton').click();
-                	//$('.tutorialbackground').fadeOut();
-                    //$('.tutorialprompt').fadeOut();
-                    $('#gamePlayButton').click();
-                    $('#tutorialNext').text('Skip');
-                    _Tutorial.hint('Playing the Game', 'Use the WASD keys to move around. Drive to the goal.', function(ok) {
-                        vwf_view.kernel.callMethod('sphere2-vwf-d7ab6422-9b04-f46f-9247-620e3217770e','Win')
+                	$("#gamePlayButton").click();
+                	//$(".tutorialbackground").fadeOut();
+                    //$(".tutorialprompt").fadeOut();
+                    $("#gamePlayButton").click();
+                    $("#tutorialNext").text("Skip");
+                    _Tutorial.hint("Playing the Game", "Use the WASD keys to move around. Drive to the goal.", function(ok) {
+                        vwf_view.kernel.callMethod("sphere2-vwf-d7ab6422-9b04-f46f-9247-620e3217770e","Win")
                     });
-                     _Tutorial.setNextEvent(new Event('won', cb));
+                     _Tutorial.setNextEvent(new Event("won", cb));
                 },
                 function(cb) {
                 	
-                	$('#gamePlayButton').click();
-                	//$('.tutorialbackground').fadeIn();
-                    //$('.tutorialprompt').fadeIn();
-                	$('#tutorialNext').text('Do it for me!');
-                    _Tutorial.hint('Create any kind of trap', 'Ok, that was too easy! Drag a trap from your palette onto the game board.', function(ok) {
+                	$("#gamePlayButton").click();
+                	//$(".tutorialbackground").fadeIn();
+                    //$(".tutorialprompt").fadeIn();
+                	$("#tutorialNext").text("Do it for me!");
+                    _Tutorial.hint("Create any kind of trap", "Ok, that was too easy! Drag a trap from your palette onto the game board.", function(ok) {
                        
                        var x = 547/1920 * $(window).width();
                        var y = 834/1017 * $(window).height();
                        dropLaser({clientX:x,clientY:y})
                         //make trap for them here
                     });
-                    _Tutorial.setNextEvent(new Event('createdTrap', cb));
+                    _Tutorial.setNextEvent(new Event("createdTrap", cb));
                 },
                
                 function(cb) {
@@ -218,16 +218,16 @@ window._Tutorial = new(function() {
                     _Tutorial.prompt('Good Job!', 'Now you see how that works? Drive your truck up to the trap and see if you can get caught.', pathRoot+'Tutorial3.png', function(ok) {
                         _Tutorial.nextClicked();
                     });
-                    _Tutorial.setNextEvent(new Event('next', cb));
+                    _Tutorial.setNextEvent(new Event("next", cb));
                 },
                 function(cb) {
                 	
-                	$('#tutorialNext').text('Skip');
-                	$('#gamePlayButton').click();
-                    _Tutorial.hint('Drive until you are caught!', 'Use the WASD keys do drive until you\'re caught. Click Next below to skip.', function(ok) {
-                        vwf_view.kernel.callMethod('sphere2-vwf-d7ab6422-9b04-f46f-9247-620e3217770e','Die')
+                	$("#tutorialNext").text("Skip");
+                	$("#gamePlayButton").click();
+                    _Tutorial.hint("Drive until you are caught!", "Use the WASD keys do drive until you're caught. Click Next below to skip.", function(ok) {
+                        vwf_view.kernel.callMethod("sphere2-vwf-d7ab6422-9b04-f46f-9247-620e3217770e","Die")
                     });
-                    _Tutorial.setNextEvent(new Event('died', cb));
+                    _Tutorial.setNextEvent(new Event("died", cb));
                 },
                 function(cb) {
                 	$('#tutorialNext').text('Next');
@@ -235,41 +235,41 @@ window._Tutorial = new(function() {
                     _Tutorial.hint('Clear the board', 'You can clear the board with the clear button. This return all the traps to the palette so you can use them again. Since you only have a limited number of traps, you must use them carefully!', function(ok) {
                         _Tutorial.nextClicked();
                     });
-                    _Tutorial.setNextEvent(new Event('next', cb));
+                    _Tutorial.setNextEvent(new Event("next", cb));
                 },
                 function(cb) {
-                	$('#tutorialNext').text('Skip');
-                    _Tutorial.hint('Clear the board', 'You can clear the board with the clear button.', function(ok) {
-                        $('#clearButton').click();
+                	$("#tutorialNext").text("Skip");
+                    _Tutorial.hint("Clear the board", "You can clear the board with the clear button.", function(ok) {
+                        $("#clearButton").click();
                     });
-                    _Tutorial.setNextEvent(new Event('cleared', cb));
+                    _Tutorial.setNextEvent(new Event("cleared", cb));
                 },
                 function(cb) {
-                	$('#tutorialNext').text('Next');
-                    _Tutorial.hint('Play/Pause', 'Up until this point, we\'ve been starting the game for you. Now that you know how to play, and how to set traps yourself, you can do it on your own.', function(ok) {
+                	$("#tutorialNext").text("Next");
+                    _Tutorial.prompt("Play/Pause", "Up until this point, we've been starting the game for you. Now that you know how to play, and how to set traps yourself, you can do it on your own.", function(ok) {
                         _Tutorial.nextClicked();
                     });
-                    _Tutorial.setNextEvent(new Event('next', cb));
+                    _Tutorial.setNextEvent(new Event("next", cb));
                 },
                 function(cb) {
-                	$('#tutorialNext').text('Skip');
-                    _Tutorial.hint('Click Play', 'On the palette, find the \'Play/Pause\' button and click it. The game should start playing.', function(ok) {
-                         $('#gamePlayButton').click();
+                	$("#tutorialNext").text("Skip");
+                    _Tutorial.hint("Click Play", "On the palette, find the 'Play/Pause' button and click it. The game should start playing.", function(ok) {
+                         $("#gamePlayButton").click();
                     });
-                    _Tutorial.setNextEvent(new Event('played', cb));
+                    _Tutorial.setNextEvent(new Event("played", cb));
                 },
                 function(cb) {
-                    _Tutorial.hint('Click Pause', 'On the palette, find the \'Play/Pause\' button and click it. The game should pause.', function(ok) {
-                        $('#gamePlayButton').click();
+                    _Tutorial.hint("Click Pause", "On the palette, find the 'Play/Pause' button and click it. The game should pause.", function(ok) {
+                        $("#gamePlayButton").click();
                     });
-                    _Tutorial.setNextEvent(new Event('paused', cb));
+                    _Tutorial.setNextEvent(new Event("paused", cb));
                 },
                 function(cb) {
-                	$('#tutorialNext').text('Finish');
-                    _Tutorial.prompt('Build your level', 'That\'s it! You now know how to build your game level. When you\'re happy with your design, just leave the page. The instructor or reference card will help you publish your world.', pathRoot+'Tutorial4.png', function(ok) {
+                	$("#tutorialNext").text("Finish");
+                    _Tutorial.prompt("Build your level", "That's it! You now know how to build your game level. When you're happy with your design, just leave the page. The instructor or reference card will help you publish your world.", pathRoot+'Tutorial4.png', function(ok) {
                         _Tutorial.nextClicked();
                     });
-                    _Tutorial.setNextEvent(new Event('next', cb));
+                    _Tutorial.setNextEvent(new Event("next", cb));
                 },
             ], function(err) {
                 _Tutorial.cancelTutorial();
