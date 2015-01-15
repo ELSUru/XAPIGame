@@ -103,10 +103,14 @@ window._Tutorial = new(function() {
     }
     this.prompt = function(title, text, img, cb) {
       
-        if (img.constructor == Function)
+        if (img.constructor == Function){
             cb = img;
-	else
+            $('.tutorialprompt img').hide();
+	}
+	else {
 	    $('.tutorialprompt img').attr('src',img);
+            $('.tutorialprompt img').show();
+        }
 
         $('.tutorialprompt').animate({
             top: '30%',
@@ -115,7 +119,6 @@ window._Tutorial = new(function() {
         $('.tutorialprompt').fadeIn();
         $('.tutorialprompt .header').text(title);
         $('.tutorialprompt .text').text(text);
-        $('.tutorialprompt img').show();
         $('#tutorialNext').unbind('click');
         $('#tutorialNext').click(cb);
         $('.tutorialbackground').fadeIn();
@@ -123,7 +126,7 @@ window._Tutorial = new(function() {
     }
     this.hint = function(title, text, cb) {
         $('.tutorialprompt').animate({
-            top: '75%',
+            top: '80%',
             left: '59%'
         });
         $('.tutorialprompt .header').text(title);
@@ -178,7 +181,7 @@ window._Tutorial = new(function() {
                 	//possibly wait for 'trymove' VWF event here to see they actually were able to move
                 	$('#gameEditGUI').parent().stop().css('left','70%');
                 	$('#tutorialNext').text('Next');
-                    _Tutorial.prompt("Playing the Game", "While the board if clear of obstacles, let's try out the game. Use the WASD keys to move around. Drive to the goal.", pathRoot+'Tutorial2.png', function(ok) {
+                    _Tutorial.prompt("Playing the Game", "While the board is clear of obstacles, let's try out the game. Use the WASD keys to move around. Drive to the goal.", pathRoot+'Tutorial2.png', function(ok) {
                         _Tutorial.nextClicked();
                     });
                     _Tutorial.setNextEvent(new Event("next", cb));
@@ -232,7 +235,7 @@ window._Tutorial = new(function() {
                 function(cb) {
                 	$('#tutorialNext').text('Next');
                     $('#gamePlayButton').click();
-                    _Tutorial.hint('Clear the board', 'You can clear the board with the clear button. This return all the traps to the palette so you can use them again. Since you only have a limited number of traps, you must use them carefully!', function(ok) {
+                    _Tutorial.prompt('Clear the board', 'You can clear the board with the clear button. This returns all the traps to the palette so you can use them again. Since you only have a limited number of traps, you must use them carefully!', function(ok) {
                         _Tutorial.nextClicked();
                     });
                     _Tutorial.setNextEvent(new Event("next", cb));
